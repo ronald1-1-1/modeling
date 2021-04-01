@@ -1,0 +1,7 @@
+angle=85
+rocketM=50
+petrolM=40
+gasSpeed=100
+petrolComRate=80
+planetM=6000000000000000000000000
+planetR=6371000
