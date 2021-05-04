@@ -18,7 +18,11 @@ class Rocket:
         self.y = 100
         self.speedX = 0
         self.speedY = 0
-
+    def changeG(self):
+        global planetM
+        global planetR
+        global g
+        g = 6.6720*planetM/((planetR+self.y)**2)/10**11
     def blit(self, screen):
         global height
         center = self.image.get_rect().center
@@ -61,7 +65,7 @@ height = 600
 fps = 60
 planetM = dic['planetM']
 planetR = dic['planetR']
-g = 6.6720*planetM/planetR/planetR/10**11
+
 
 background = pg.image.load('back.png')
 starImage = pg.image.load('star.png')
@@ -76,6 +80,7 @@ t2 = 0
 second = 0
 stars = []
 while isRun:
+    rocket.changeG()
     clock.tick(fps)
     t1 = (t1+1) % 20
     if t1 == 0:
@@ -90,10 +95,10 @@ while isRun:
         print('-Rocket speed Y:', rocket.speedY)
         print('-Rocket speed module:', math.sqrt(rocket.speedX**2+rocket.speedY**2))
         print('-Petrol weight:', max(0,rocket.petrolM))
+        print('g:', g)
     for e in pg.event.get():
         if e.type == pg.QUIT:
             isRun = False
-        
     screen.blit(background, background.get_rect(bottomright = (width, height)))
     if rocket.petrolM > 0:
         rocket.changeSpeedX()
